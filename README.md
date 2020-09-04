@@ -1,7 +1,7 @@
 # bible_reading_plan
 
 Application developed for people who want to read the entire Bible in one year.
-[Download Application](caffee-tec.github.io)
+[Download Application](bCarlosCoffee.github.io)
 
 ## Getting Started
 

@@ -31,8 +31,8 @@ class SetAlarmScreen extends StatelessWidget {
                 children: <Widget> [
                   const SizedBox(height: 20,),
 
-                  if(ReadingPlanController.to.remind_me == null && 
-                    ReadingPlanController.to.set_time == null
+                  if(ReadingPlanController.to.remindMe == null && 
+                    ReadingPlanController.to.setTime == null
                     )
                     Text(
                       "Escolha um horário para ser lembrado todos os dias...",
@@ -41,16 +41,16 @@ class SetAlarmScreen extends StatelessWidget {
                       ),
                     ),
 
-                  if(ReadingPlanController.to.set_time != null)
+                  if(ReadingPlanController.to.setTime != null)
                     const Text('Horário definido para todos os dias às:',),
                   const SizedBox(height: 10,),
                   FlatButton(
                     child: Text(
-                      ReadingPlanController.to.set_time == null ?
+                      ReadingPlanController.to.setTime == null ?
                       "00:00:00" : 
-                      "${ReadingPlanController.to.set_time?.hour}:" +
-                      "${ReadingPlanController.to.set_time?.minute}:" +
-                      "${ReadingPlanController.to.set_time?.second}",
+                      "${ReadingPlanController.to.setTime?.hour}:" +
+                      "${ReadingPlanController.to.setTime?.minute}:" +
+                      "${ReadingPlanController.to.setTime?.second}",
                       style: const TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 19,
@@ -62,14 +62,14 @@ class SetAlarmScreen extends StatelessWidget {
                       await DatePicker.showTimePicker(
                         context,
                         locale: LocaleType.pt,
-                        currentTime: ReadingPlanController.to.set_time != null ? 
+                        currentTime: ReadingPlanController.to.setTime != null ? 
                         DateTime(
                           _now.year,
                           _now.month,
                           _now.day,
-                          ReadingPlanController.to.set_time.hour,
-                          ReadingPlanController.to.set_time.minute,
-                          ReadingPlanController.to.set_time.second,
+                          ReadingPlanController.to.setTime.hour,
+                          ReadingPlanController.to.setTime.minute,
+                          ReadingPlanController.to.setTime.second,
                           
                         ) : _now,
                         onConfirm: (time) {
@@ -83,8 +83,8 @@ class SetAlarmScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 10,),
                   Text(
-                    ReadingPlanController.to.remind_me != null && 
-                    !ReadingPlanController.to.remind_me ? 
+                    ReadingPlanController.to.remindMe != null && 
+                    !ReadingPlanController.to.remindMe ? 
                     "Mas o alarme está desativado..." :
                     "",
                   ),
@@ -93,13 +93,13 @@ class SetAlarmScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget> [
-                      if(ReadingPlanController.to.set_time != null)
+                      if(ReadingPlanController.to.setTime != null)
                         RaisedButton(
                           color: Theme.of(context).buttonColor,
                           textColor: Colors.white,
                           child: Text(
-                            ReadingPlanController.to.remind_me != null && 
-                            !ReadingPlanController.to.remind_me ?
+                            ReadingPlanController.to.remindMe != null && 
+                            !ReadingPlanController.to.remindMe ?
                             "Ativar" : "Pronto",
                           ),
                           onPressed: () async {
@@ -108,9 +108,9 @@ class SetAlarmScreen extends StatelessWidget {
 
                           },
                         ),
-                      if(ReadingPlanController.to.set_time != null && 
-                        ReadingPlanController.to.remind_me != null && 
-                        ReadingPlanController.to.remind_me)
+                      if(ReadingPlanController.to.setTime != null && 
+                        ReadingPlanController.to.remindMe != null && 
+                        ReadingPlanController.to.remindMe)
                         Padding(
                           padding: const EdgeInsets.only(left: 5,),
                           child: RaisedButton(

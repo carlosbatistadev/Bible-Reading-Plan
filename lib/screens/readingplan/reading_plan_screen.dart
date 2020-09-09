@@ -34,7 +34,7 @@ class ReadingPlanScreen extends StatelessWidget {
             if(ReadingPlanController.to.data.isEmpty)
               return LinearProgressIndicator();
 
-            bool _already_started_open = false;
+            bool _alreadyStartedOpen = false;
             bool _initiallyExpanded = false;
 
             return Column(
@@ -49,10 +49,10 @@ class ReadingPlanScreen extends StatelessWidget {
                   if(_percentageText["inInt"] >= 50) _percentageColor = Colors.orange;
                   if(_percentageText["inInt"] >= 90) _percentageColor = Colors.green;
 
-                  if(!_already_started_open) {
+                  if(!_alreadyStartedOpen) {
                     if(_percentageText["inInt"] != 100){
                       _initiallyExpanded = true;
-                      _already_started_open = true;
+                      _alreadyStartedOpen = true;
                     }
                   } else {
                     _initiallyExpanded = false;
@@ -68,7 +68,7 @@ class ReadingPlanScreen extends StatelessWidget {
                         Text(
                           ReadingPlanController.to.data[month][0],
                           style: const TextStyle(
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w700,
                             fontSize: 18,
                           ),
                         ),
@@ -89,11 +89,10 @@ class ReadingPlanScreen extends StatelessWidget {
 
                         if(ReadingPlanController.to.data[month][day] is String ||
                           ReadingPlanController.to.data[month][day] is int
-                        )
+                        ) {
                           return Container();
-
-
-
+                        }
+                        
                         return dayWidget(
                           context: context,
                           idMonth: month,

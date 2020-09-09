@@ -26,10 +26,10 @@ Widget tileWidget({
       ),
     ),
     child: ListTile(
-      leading: Icon(
+      leading: icon != null ? Icon(
         icon,
         color: selected ? Theme.of(context).accentColor : Colors.grey,
-      ),
+      ) : null,
       trailing: Icon(
         Icons.arrow_forward,
         color: selected ? Theme.of(context).accentColor : Colors.grey,

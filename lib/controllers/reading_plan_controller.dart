@@ -20,17 +20,16 @@ class ReadingPlanController extends GetxController {
   AndroidFlutterLocalNotificationsPlugin androidFlutterLocalNotificationsPlugin;
   AndroidNotificationDetails androidPlatformChannelSpecifics;
 
-  bool remind_me;
-  Time set_time;
-  IconData remind_me_icon = Icons.notifications;
+  bool remindMe;
+  Time setTime;
+  IconData remindMeIcon = Icons.notifications;
 
 
   List<dynamic> data = [];
 
-
+  final String fileName = "data.json";
   File jsonFile;
   Directory dir;
-  final String fileName = "data.json";
   bool fileExists = false;
   bool isLoading = false;
 
@@ -62,10 +61,10 @@ class ReadingPlanController extends GetxController {
         final Map<String, dynamic> _dataJSON = json.decode(jsonFile.readAsStringSync());
 
         data = _dataJSON["annual_reading_plan"];
-        set_time = _formatTime(_dataJSON["timeAlarm"], toString: false);
-        remind_me = _dataJSON["alarmActivated"];
+        setTime = _formatTime(_dataJSON["timeAlarm"], toString: false);
+        remindMe = _dataJSON["alarmActivated"];
 
-        _changeAlarmIcon(remind_me);
+        _changeAlarmIcon(remindMe);
 
       }
 
@@ -156,8 +155,8 @@ class ReadingPlanController extends GetxController {
     final Map<String, dynamic> _dataJSON = json.decode(jsonFile.readAsStringSync());
         
     data = _dataJSON["annual_reading_plan"];
-    set_time = _formatTime(_dataJSON["timeAlarm"], toString: false);
-    remind_me = _dataJSON["alarmActivated"];
+    setTime = _formatTime(_dataJSON["timeAlarm"], toString: false);
+    remindMe = _dataJSON["alarmActivated"];
 
     _changeIsLoading(); // False
 
@@ -165,7 +164,7 @@ class ReadingPlanController extends GetxController {
 
   void changeTime(DateTime dateTime) {
 
-    set_time = Time(
+    setTime = Time(
 
       dateTime.hour,
       dateTime.minute,
@@ -180,13 +179,13 @@ class ReadingPlanController extends GetxController {
   void _changeAlarmIcon(bool value) {
 
     if(value == null) {
-      remind_me_icon = Icons.notifications;
+      remindMeIcon = Icons.notifications;
 
     } else if(value) {
-      remind_me_icon = Icons.notifications_active;
+      remindMeIcon = Icons.notifications_active;
 
     } else {
-      remind_me_icon = Icons.notifications_off;
+      remindMeIcon = Icons.notifications_off;
     }
 
   }
@@ -216,8 +215,9 @@ class ReadingPlanController extends GetxController {
       final _pendingNotificationRequests = 
         await androidFlutterLocalNotificationsPlugin.pendingNotificationRequests();
 
-      if(_pendingNotificationRequests.isNotEmpty)
+      if(_pendingNotificationRequests.isNotEmpty) {
         await _cancelScheduledAlarms();
+      }
 
     }
 
@@ -226,18 +226,18 @@ class ReadingPlanController extends GetxController {
       10,
       "A paz do senhor!",
       'Está na hora, vamos ler a bíblia ?',
-      Time(set_time.hour, set_time.minute, set_time.second),
+      Time(setTime.hour, setTime.minute, setTime.second),
       androidPlatformChannelSpecifics,
     );
 
 
     changeCheckedAndChangeAlarm(
-      timeAlarm: set_time,
+      timeAlarm: setTime,
       alarmActivated: true,
     );
 
-    remind_me = true;
-    _changeAlarmIcon(remind_me);
+    remindMe = true;
+    _changeAlarmIcon(remindMe);
 
     update();
     Get.back();
@@ -256,12 +256,14 @@ class ReadingPlanController extends GetxController {
   Future<void> disableAlarm() async {
 
     changeCheckedAndChangeAlarm(
-      timeAlarm: set_time,
+      timeAlarm: setTime,
       alarmActivated: false,
     );
 
-    remind_me = false;
-    _changeAlarmIcon(remind_me);
+    remindMe = false;
+    _changeAlarmIcon(remindMe);
+
+    _cancelScheduledAlarms();
 
     update();
     Get.back();

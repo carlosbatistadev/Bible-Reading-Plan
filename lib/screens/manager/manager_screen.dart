@@ -18,8 +18,7 @@ import '../setalarm/set_alarm_screen.dart';
 
 class ScreenManager extends StatelessWidget {
 
-  ManagerController controller = Get.put(ManagerController());
-
+  final ManagerController controller = Get.put(ManagerController());
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +36,7 @@ class ScreenManager extends StatelessWidget {
             builder: (_) {
 
               return IconButton(
-                icon: Icon(ReadingPlanController.to.remind_me_icon),
+                icon: Icon(ReadingPlanController.to.remindMeIcon),
                 onPressed: () {
                   Get.to(SetAlarmScreen());
                 }
@@ -85,8 +84,8 @@ class ScreenManager extends StatelessWidget {
                 ),
                 tileWidget(
                   context: context,
-                  selected: ManagerController.to.current_screen == "reading_plan" ? true : false,
-                  icon: Icons.chrome_reader_mode,
+                  selected: ManagerController.to.currentScreen == "reading_plan" ? true : false,
+                  //icon: Icons.chrome_reader_mode,
                   title: "Plano de leitura",
                   onTap: () {
                     ManagerController.to.updateScreen({
@@ -97,8 +96,20 @@ class ScreenManager extends StatelessWidget {
                 ),
                 tileWidget(
                   context: context,
-                  selected: ManagerController.to.current_screen == "why_read_the_bible" ? true : false,
-                  icon: Icons.help,
+                  selected: ManagerController.to.currentScreen == "books_and_letters" ? true : false,
+                  //icon: Icons.chrome_reader_mode,
+                  title: "Livros e Cartas",
+                  onTap: () {
+                    ManagerController.to.updateScreen({
+                      "title": "Livros e Cartas",
+                      "current_screen": "books_and_letters",
+                    });
+                  }
+                ),
+                tileWidget(
+                  context: context,
+                  selected: ManagerController.to.currentScreen == "why_read_the_bible" ? true : false,
+                  //icon: Icons.help,
                   title: "Por que ler a Bíblia",
                   onTap: () {
                     ManagerController.to.updateScreen({
@@ -109,8 +120,8 @@ class ScreenManager extends StatelessWidget {
                 ),
                 tileWidget(
                   context: context,
-                  selected: ManagerController.to.current_screen == "how_to_read_the_bible" ? true : false,
-                  icon: Icons.help,
+                  selected: ManagerController.to.currentScreen == "how_to_read_the_bible" ? true : false,
+                  //icon: Icons.help,
                   title: "Como ler a Bíblia",
                   onTap: () {
                     ManagerController.to.updateScreen({
@@ -121,8 +132,8 @@ class ScreenManager extends StatelessWidget {
                 ),
                 tileWidget(
                   context: context,
-                  selected: ManagerController.to.current_screen == "about" ? true : false,
-                  icon: Icons.info,
+                  selected: ManagerController.to.currentScreen == "about" ? true : false,
+                  //icon: Icons.info,
                   title: "Sobre",
                   onTap: () {
                     ManagerController.to.updateScreen({

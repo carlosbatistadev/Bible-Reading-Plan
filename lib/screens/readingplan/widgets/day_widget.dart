@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-// External Packages
-import 'package:get/get.dart';
-
 // Controller
 import '../../../controllers/reading_plan_controller.dart';
 
@@ -18,7 +15,7 @@ Widget dayWidget({
 
 }) {
 
-  List<String> separate_content = content.split(";");
+  final List<String> separateContent = content.split(";");
 
   return InkWell(
     onLongPress: () {
@@ -48,7 +45,7 @@ Widget dayWidget({
                     "DIA: " + day,
                     style: const TextStyle(
                       fontSize: 17,
-                      fontWeight: FontWeight.w400,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ]
@@ -57,10 +54,10 @@ Widget dayWidget({
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: List.generate(
-                  separate_content.length,
+                  separateContent.length,
                   (books) {
                     return Text(
-                      separate_content[books].trim(),
+                      separateContent[books].trim(),
                     );
                   }
                 ),

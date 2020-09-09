@@ -59,24 +59,4 @@ class WhyReadTheBibleScreen extends StatelessWidget {
       ),
     );
   }
-
-  Padding _defaultText({String primaryText, String secundaryText}) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
-      child: Text.rich(
-        TextSpan(
-          text: primaryText, 
-          children: <TextSpan>[
-            TextSpan(
-              text: secundaryText, 
-              style: TextStyle(
-                fontStyle: FontStyle.italic,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ],
-        ),
-      )
-    );
-  }
 }
